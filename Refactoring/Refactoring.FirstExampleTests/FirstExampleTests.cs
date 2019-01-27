@@ -36,7 +36,7 @@ namespace Refactoring.FirstExampleTests
 Amount owed is $1,730.00
 You earned 47 credits";
 
-            expected.Should().Be(statement);
+            statement.Should().Be(expected);
         }
     }
 }

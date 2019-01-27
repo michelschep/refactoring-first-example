@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using FluentAssertions.Formatting;
 
 namespace Refactoring.FirstExampleTests
 {
@@ -11,11 +12,8 @@ namespace Refactoring.FirstExampleTests
             var totalAmount = 0;
             var volumeCredits = 0;
             var result = $"Statement for {invoice.Customer}\r\n";
-            var format = new CultureInfo("en-US", false).NumberFormat;
-            format.CurrencyDecimalDigits = 2;
-            format.CurrencySymbol = "$";
-            format.CurrencyDecimalSeparator = ",";
-            format.CurrencyGroupSeparator = ".";
+
+            var format = Format();
 
             foreach (var perf in invoice.Performances)
             {
@@ -50,12 +48,25 @@ namespace Refactoring.FirstExampleTests
                 if ("comedy" == play.Type) volumeCredits += (int)Math.Floor((double)perf.Audience / 5);
 
                 // print line for this order
-                result += $" {play.Name}: {(thisAmount / 100).ToString("C", new CultureInfo("en-US"))} ({perf.Audience} seats)\r\n";
+                //result += $" {play.Name}: {(thisAmount / 100).ToString("C", new CultureInfo("en-US"))} ({perf.Audience} seats)\r\n";
+                result += $" {play.Name}: {format(thisAmount / 100)} ({perf.Audience} seats)\r\n";
                 totalAmount += thisAmount;
             }
-            result += $"Amount owed is {(totalAmount / 100).ToString("C", new CultureInfo("en-US"))}\r\n";
+            //result += $"Amount owed is {(totalAmount / 100).ToString("C", new CultureInfo("en-US"))}\r\n";
+            result += $"Amount owed is {format(totalAmount / 100)}\r\n";
             result += $"You earned {volumeCredits} credits";
             return result;
+        }
+
+        private Func<int, string> Format()
+        {
+            var format = new CultureInfo("en-US", false).NumberFormat;
+            format.CurrencyDecimalDigits = 2;
+            format.CurrencySymbol = "$";
+            format.CurrencyDecimalSeparator = ".";
+            format.CurrencyGroupSeparator = ",";
+
+            return s => s.ToString("C", format);
         }
     }
 }
