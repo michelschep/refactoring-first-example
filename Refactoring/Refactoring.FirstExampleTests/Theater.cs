@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using FluentAssertions.Formatting;
 
 namespace Refactoring.FirstExampleTests
 {
@@ -13,7 +12,7 @@ namespace Refactoring.FirstExampleTests
             var volumeCredits = 0;
             var result = $"Statement for {invoice.Customer}\r\n";
 
-            var format = Format();
+            var format = Format("en-US", "C", "$", 2);
 
             foreach (var perf in invoice.Performances)
             {
@@ -58,15 +57,15 @@ namespace Refactoring.FirstExampleTests
             return result;
         }
 
-        private Func<int, string> Format()
+        private Func<int, string> Format(string locale, string style, string currency, int minimalFractionDigits)
         {
-            var format = new CultureInfo("en-US", false).NumberFormat;
-            format.CurrencyDecimalDigits = 2;
-            format.CurrencySymbol = "$";
+            var format = new CultureInfo(locale, false).NumberFormat;
+            format.CurrencyDecimalDigits = minimalFractionDigits;
+            format.CurrencySymbol = currency;
             format.CurrencyDecimalSeparator = ".";
             format.CurrencyGroupSeparator = ",";
 
-            return s => s.ToString("C", format);
+            return s => s.ToString(style, format);
         }
     }
 }
