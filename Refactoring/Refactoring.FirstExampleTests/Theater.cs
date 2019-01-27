@@ -57,6 +57,17 @@ namespace Refactoring.FirstExampleTests
             return result;
         }
 
+        /// <summary>
+        /// In Fowler's Refactoring book the example was written in Javascript.
+        /// The format function was implemented as follows:
+        /// <code>const format = new Intl.NumberFormat(...)</code>
+        /// To keep the example more or less the same I used the Format method to format the amounts.
+        /// </summary>
+        /// <param name="locale"></param>
+        /// <param name="style"></param>
+        /// <param name="currency"></param>
+        /// <param name="minimalFractionDigits"></param>
+        /// <returns></returns>
         private Func<int, string> Format(string locale, string style, string currency, int minimalFractionDigits)
         {
             var format = new CultureInfo(locale, false).NumberFormat;
