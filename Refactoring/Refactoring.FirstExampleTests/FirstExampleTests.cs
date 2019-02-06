@@ -28,13 +28,12 @@ namespace Refactoring.FirstExampleTests
 
             var statement = theater.Statement(invoice, plays);
 
-            string expected =
-@"Statement for BigCo
- Hamlet: $650.00 (55 seats)
- As You Like It: $580.00 (35 seats)
- Othello: $500.00 (40 seats)
-Amount owed is $1,730.00
-You earned 47 credits";
+            string expected = "Statement for BigCo\r\n";
+            expected += " Hamlet: $650.00 (55 seats)\r\n";
+            expected += " As You Like It: $580.00 (35 seats)\r\n";
+            expected += " Othello: $500.00 (40 seats)\r\n";
+            expected += "Amount owed is $1,730.00\r\n";
+            expected += "You earned 47 credits";
 
             statement.Should().Be(expected);
         }

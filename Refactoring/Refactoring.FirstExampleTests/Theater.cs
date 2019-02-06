@@ -12,7 +12,7 @@ namespace Refactoring.FirstExampleTests
             var volumeCredits = 0;
             var result = $"Statement for {invoice.Customer}\r\n";
 
-            var format = Format("en-US", "C", "$", 2);
+            var format = IntlNumberFormat("en-US", "C", "$", 2);
 
             foreach (var perf in invoice.Performances)
             {
@@ -47,11 +47,9 @@ namespace Refactoring.FirstExampleTests
                 if ("comedy" == play.Type) volumeCredits += (int)Math.Floor((double)perf.Audience / 5);
 
                 // print line for this order
-                //result += $" {play.Name}: {(thisAmount / 100).ToString("C", new CultureInfo("en-US"))} ({perf.Audience} seats)\r\n";
                 result += $" {play.Name}: {format(thisAmount / 100)} ({perf.Audience} seats)\r\n";
                 totalAmount += thisAmount;
             }
-            //result += $"Amount owed is {(totalAmount / 100).ToString("C", new CultureInfo("en-US"))}\r\n";
             result += $"Amount owed is {format(totalAmount / 100)}\r\n";
             result += $"You earned {volumeCredits} credits";
             return result;
@@ -68,7 +66,7 @@ namespace Refactoring.FirstExampleTests
         /// <param name="currency"></param>
         /// <param name="minimalFractionDigits"></param>
         /// <returns></returns>
-        private Func<int, string> Format(string locale, string style, string currency, int minimalFractionDigits)
+        private Func<int, string> IntlNumberFormat(string locale, string style, string currency, int minimalFractionDigits)
         {
             var format = new CultureInfo(locale, false).NumberFormat;
             format.CurrencyDecimalDigits = minimalFractionDigits;
