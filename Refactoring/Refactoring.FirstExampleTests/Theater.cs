@@ -1,12 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 
 namespace Refactoring.FirstExampleTests
 {
     public class Theater
     {
-        public string Statement(Invoice invoice, Dictionary<string, Play> plays, Func<Performance, Play> playFor)
+        public string Statement(Invoice invoice, Func<Performance, Play> playFor)
         {
             var totalAmount = 0;
             var volumeCredits = 0;
