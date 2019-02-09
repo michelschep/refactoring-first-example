@@ -21,10 +21,8 @@ namespace Refactoring.FirstExampleTests
                 totalAmount += AmountFor(perf);
             }
 
-            var volumeCredits = TotalVolumeCredits(invoice);
-
             result += $"Amount owed is {Usd(totalAmount / 100)}\r\n";
-            result += $"You earned {volumeCredits} credits";
+            result += $"You earned {TotalVolumeCredits(invoice)} credits";
             return result;
         }
 
