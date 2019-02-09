@@ -31,11 +31,11 @@ namespace Refactoring.FirstExampleTests
             return result;
         }
 
-        private int VolumeCreditsFor(Performance perf)
+        private int VolumeCreditsFor(Performance aPerformance)
         {
-            var volumeCredits = Math.Max(perf.Audience - 30, 0);
+            var volumeCredits = Math.Max(aPerformance.Audience - 30, 0);
             // add extra credit for every ten comedy attendees
-            if ("comedy" == _playFor(perf).Type) volumeCredits += (int) Math.Floor((double) perf.Audience / 5);
+            if ("comedy" == _playFor(aPerformance).Type) volumeCredits += (int) Math.Floor((double) aPerformance.Audience / 5);
             return volumeCredits;
         }
 
