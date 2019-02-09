@@ -13,11 +13,7 @@ namespace Refactoring.FirstExampleTests
 
             var result = $"Statement for {invoice.Customer}\r\n";
 
-            var totalAmount = 0;
-            foreach (var perf in invoice.Performances)
-            {
-                totalAmount += AmountFor(perf);
-            }
+            var totalAmount = TotalAmount(invoice);
             foreach (var perf in invoice.Performances)
             {
                 // print line for this order
@@ -27,6 +23,17 @@ namespace Refactoring.FirstExampleTests
             result += $"Amount owed is {Usd(totalAmount / 100)}\r\n";
             result += $"You earned {TotalVolumeCredits(invoice)} credits";
             return result;
+        }
+
+        private int TotalAmount(Invoice invoice)
+        {
+            var totalAmount = 0;
+            foreach (var perf in invoice.Performances)
+            {
+                totalAmount += AmountFor(perf);
+            }
+
+            return totalAmount;
         }
 
         private int TotalVolumeCredits(Invoice invoice)
