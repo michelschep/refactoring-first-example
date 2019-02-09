@@ -21,7 +21,7 @@ namespace Refactoring.FirstExampleTests
             {
                 var thisAmount = 0;
 
-                thisAmount = AmountFor(perf, playFor(perf));
+                thisAmount = AmountFor(perf);
 
                 // add volume credits
                 volumeCredits += Math.Max(perf.Audience - 30, 0);
@@ -37,10 +37,10 @@ namespace Refactoring.FirstExampleTests
             return result;
         }
 
-        private static int AmountFor(Performance aPerformance, Play play)
+        private int AmountFor(Performance aPerformance)
         {
             int result;
-            switch (play.Type)
+            switch (_playFor(aPerformance).Type)
             {
                 case "tragedy":
                     result = 40000;
@@ -60,7 +60,7 @@ namespace Refactoring.FirstExampleTests
                     result += 300 * aPerformance.Audience;
                     break;
                 default:
-                    throw new Exception($"unknown type: {play.Type}");
+                    throw new Exception($"unknown type: {_playFor(aPerformance).Type}");
             }
 
             return result;
