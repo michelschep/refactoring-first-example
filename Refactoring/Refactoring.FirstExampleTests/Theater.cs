@@ -11,9 +11,9 @@ namespace Refactoring.FirstExampleTests
         {
             _playFor = playFor;
 
-            var totalAmount = 0;
             var result = $"Statement for {invoice.Customer}\r\n";
 
+            var totalAmount = 0;
             foreach (var perf in invoice.Performances)
             {
                 // print line for this order
