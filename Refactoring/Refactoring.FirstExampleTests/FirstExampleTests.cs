@@ -26,7 +26,7 @@ namespace Refactoring.FirstExampleTests
                 {"othello", new Play("Othello", "tragedy")}
             };
 
-            var statement = theater.Statement(invoice, plays);
+            var statement = theater.Statement(invoice, plays, perf => plays[perf.PlayId]);
 
             string expected = "Statement for BigCo\r\n";
             expected += " Hamlet: $650.00 (55 seats)\r\n";

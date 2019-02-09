@@ -6,7 +6,7 @@ namespace Refactoring.FirstExampleTests
 {
     public class Theater
     {
-        public string Statement(Invoice invoice, Dictionary<string, Play> plays)
+        public string Statement(Invoice invoice, Dictionary<string, Play> plays, Func<Performance, Play> playFor)
         {
             var totalAmount = 0;
             var volumeCredits = 0;
@@ -16,7 +16,7 @@ namespace Refactoring.FirstExampleTests
 
             foreach (var perf in invoice.Performances)
             {
-                var play = plays[perf.PlayId];
+                var play = playFor(perf);
                 var thisAmount = 0;
 
                 thisAmount = AmountFor(perf, play);
