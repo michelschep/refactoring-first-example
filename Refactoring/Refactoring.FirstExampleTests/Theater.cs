@@ -13,14 +13,13 @@ namespace Refactoring.FirstExampleTests
 
             var result = $"Statement for {invoice.Customer}\r\n";
 
-            var totalAmount = TotalAmount(invoice);
             foreach (var perf in invoice.Performances)
             {
                 // print line for this order
                 result += $" {_playFor(perf).Name}: {Usd(AmountFor(perf) / 100)} ({perf.Audience} seats)\r\n";
             }
 
-            result += $"Amount owed is {Usd(totalAmount / 100)}\r\n";
+            result += $"Amount owed is {Usd(TotalAmount(invoice) / 100)}\r\n";
             result += $"You earned {TotalVolumeCredits(invoice)} credits";
             return result;
         }
