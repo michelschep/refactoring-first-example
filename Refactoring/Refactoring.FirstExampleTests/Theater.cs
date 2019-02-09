@@ -17,13 +17,16 @@ namespace Refactoring.FirstExampleTests
 
             foreach (var perf in invoice.Performances)
             {
-                // add volume credits
-                volumeCredits += VolumeCreditsFor(perf);
-
                 // print line for this order
                 result += $" {_playFor(perf).Name}: {Usd(AmountFor(perf) / 100)} ({perf.Audience} seats)\r\n";
                 totalAmount += AmountFor(perf);
             }
+            foreach (var perf in invoice.Performances)
+            {
+                // add volume credits
+                volumeCredits += VolumeCreditsFor(perf);
+            }
+
             result += $"Amount owed is {Usd(totalAmount / 100)}\r\n";
             result += $"You earned {volumeCredits} credits";
             return result;
