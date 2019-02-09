@@ -22,10 +22,10 @@ namespace Refactoring.FirstExampleTests
                 // add volume credits
                 volumeCredits += Math.Max(perf.Audience - 30, 0);
                 // add extra credit for every ten comedy attendees
-                if ("comedy" == playFor(perf).Type) volumeCredits += (int)Math.Floor((double)perf.Audience / 5);
+                if ("comedy" == _playFor(perf).Type) volumeCredits += (int)Math.Floor((double)perf.Audience / 5);
 
                 // print line for this order
-                result += $" {playFor(perf).Name}: {format(AmountFor(perf) / 100)} ({perf.Audience} seats)\r\n";
+                result += $" {_playFor(perf).Name}: {format(AmountFor(perf) / 100)} ({perf.Audience} seats)\r\n";
                 totalAmount += AmountFor(perf);
             }
             result += $"Amount owed is {format(totalAmount / 100)}\r\n";
