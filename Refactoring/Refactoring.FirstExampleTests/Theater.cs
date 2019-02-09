@@ -12,7 +12,6 @@ namespace Refactoring.FirstExampleTests
             _playFor = playFor;
 
             var totalAmount = 0;
-            var volumeCredits = 0;
             var result = $"Statement for {invoice.Customer}\r\n";
 
             foreach (var perf in invoice.Performances)
@@ -21,6 +20,8 @@ namespace Refactoring.FirstExampleTests
                 result += $" {_playFor(perf).Name}: {Usd(AmountFor(perf) / 100)} ({perf.Audience} seats)\r\n";
                 totalAmount += AmountFor(perf);
             }
+
+            var volumeCredits = 0;
             foreach (var perf in invoice.Performances)
             {
                 // add volume credits
