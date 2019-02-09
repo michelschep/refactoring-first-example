@@ -20,9 +20,7 @@ namespace Refactoring.FirstExampleTests
             foreach (var perf in invoice.Performances)
             {
                 // add volume credits
-                volumeCredits += Math.Max(perf.Audience - 30, 0);
-                // add extra credit for every ten comedy attendees
-                if ("comedy" == _playFor(perf).Type) volumeCredits += (int)Math.Floor((double)perf.Audience / 5);
+                volumeCredits += VolumeCreditsFor(perf);
 
                 // print line for this order
                 result += $" {_playFor(perf).Name}: {format(AmountFor(perf) / 100)} ({perf.Audience} seats)\r\n";
@@ -31,6 +29,14 @@ namespace Refactoring.FirstExampleTests
             result += $"Amount owed is {format(totalAmount / 100)}\r\n";
             result += $"You earned {volumeCredits} credits";
             return result;
+        }
+
+        private int VolumeCreditsFor(Performance perf)
+        {
+            var volumeCredits = Math.Max(perf.Audience - 30, 0);
+            // add extra credit for every ten comedy attendees
+            if ("comedy" == _playFor(perf).Type) volumeCredits += (int) Math.Floor((double) perf.Audience / 5);
+            return volumeCredits;
         }
 
         private int AmountFor(Performance aPerformance)
