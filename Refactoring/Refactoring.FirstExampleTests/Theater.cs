@@ -21,15 +21,15 @@ namespace Refactoring.FirstExampleTests
                 volumeCredits += VolumeCreditsFor(perf);
 
                 // print line for this order
-                result += $" {_playFor(perf).Name}: {Format(AmountFor(perf) / 100)} ({perf.Audience} seats)\r\n";
+                result += $" {_playFor(perf).Name}: {Usd(AmountFor(perf) / 100)} ({perf.Audience} seats)\r\n";
                 totalAmount += AmountFor(perf);
             }
-            result += $"Amount owed is {Format(totalAmount / 100)}\r\n";
+            result += $"Amount owed is {Usd(totalAmount / 100)}\r\n";
             result += $"You earned {volumeCredits} credits";
             return result;
         }
 
-        private string Format(int aNumber)
+        private string Usd(int aNumber)
         {
             return IntlNumberFormat("en-US", "C", "$", 2)(aNumber);
         }
