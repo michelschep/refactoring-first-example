@@ -16,9 +16,12 @@ namespace Refactoring.FirstExampleTests
             var totalAmount = 0;
             foreach (var perf in invoice.Performances)
             {
+                totalAmount += AmountFor(perf);
+            }
+            foreach (var perf in invoice.Performances)
+            {
                 // print line for this order
                 result += $" {_playFor(perf).Name}: {Usd(AmountFor(perf) / 100)} ({perf.Audience} seats)\r\n";
-                totalAmount += AmountFor(perf);
             }
 
             result += $"Amount owed is {Usd(totalAmount / 100)}\r\n";
