@@ -21,6 +21,15 @@ namespace Refactoring.FirstExampleTests
                 totalAmount += AmountFor(perf);
             }
 
+            var volumeCredits = TotalVolumeCredits(invoice);
+
+            result += $"Amount owed is {Usd(totalAmount / 100)}\r\n";
+            result += $"You earned {volumeCredits} credits";
+            return result;
+        }
+
+        private int TotalVolumeCredits(Invoice invoice)
+        {
             var volumeCredits = 0;
             foreach (var perf in invoice.Performances)
             {
@@ -28,9 +37,7 @@ namespace Refactoring.FirstExampleTests
                 volumeCredits += VolumeCreditsFor(perf);
             }
 
-            result += $"Amount owed is {Usd(totalAmount / 100)}\r\n";
-            result += $"You earned {volumeCredits} credits";
-            return result;
+            return volumeCredits;
         }
 
         private string Usd(int aNumber)
