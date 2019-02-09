@@ -5,8 +5,12 @@ namespace Refactoring.FirstExampleTests
 {
     public class Theater
     {
+        private Func<Performance, Play> _playFor;
+
         public string Statement(Invoice invoice, Func<Performance, Play> playFor)
         {
+            _playFor = playFor;
+
             var totalAmount = 0;
             var volumeCredits = 0;
             var result = $"Statement for {invoice.Customer}\r\n";
