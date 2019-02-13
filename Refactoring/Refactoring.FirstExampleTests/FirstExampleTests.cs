@@ -10,8 +10,6 @@ namespace Refactoring.FirstExampleTests
         public void TestIfItStillWorksAsBefore()
         {
             // How does Martin Fowler calls this type of test?
-            var theater = new Theater();
-
             var performances = new[]
             {
                 new Performance("hamlet", 55),
@@ -26,7 +24,9 @@ namespace Refactoring.FirstExampleTests
                 {"othello", new Play("Othello", "tragedy")}
             };
 
-            var statement = theater.Statement(invoice, perf => plays[perf.PlayId]);
+            var theater = new Theater(perf => plays[perf.PlayId]);
+
+            var statement = theater.Statement(invoice);
 
             string expected = "Statement for BigCo\r\n";
             expected += " Hamlet: $650.00 (55 seats)\r\n";
